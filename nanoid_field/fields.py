@@ -15,7 +15,9 @@ class NanoidField(models.CharField):
         self.alphabet = kwargs.pop(
             "alphabet", getattr(settings, "NANOID_ALPHABET", DEFAULT_ALPHABET)
         )
-        kwargs["max_length"] = kwargs.pop("max_length", DEFAULT_SIZE)
+        kwargs["max_length"] = kwargs.pop(
+            "max_length", getattr(settings, "NANOID_SIZE", DEFAULT_SIZE)
+        )
         kwargs["default"] = self.nanoid
 
         super(NanoidField, self).__init__(*args, **kwargs)
